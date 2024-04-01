@@ -48,3 +48,9 @@ void transposeIfMatrixHasNotEqualSumOfRows(matrix* matrix) {
         transposeMatrix(matrix);
     }
 }
+
+bool isMutuallyInverseMatrices(matrix left, matrix right) {
+    matrix multiplication = multiply(left, right);
+
+    return isEMatrix(&multiplication);
+}
