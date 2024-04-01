@@ -257,3 +257,37 @@ void printMatricesWithMinNorm(matrix* matrices, int matrixAmount) {
         }
     }
 }
+
+static bool isSpecial2(const int* array, int size, int index) {
+    int value = array[index];
+
+    for (int i = 0; i < index; i++) {
+        if (array[i] >= value) {
+            return false;
+        }
+    }
+
+    for (int i = index + 1; i < size; i++) {
+        if (array[i] <= value) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int countSpecialElements2(matrix matrix) {
+    int count = 0;
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        int* row = matrix.cells[i];
+
+        for (int j = 0; j < matrix.columns; j++) {
+            if (isSpecial2(row, matrix.columns, j)) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
