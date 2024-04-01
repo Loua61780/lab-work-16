@@ -133,3 +133,13 @@ void insertionSortRowsMatrixByRowCriteriaF(matrix matrix, float (*criteria)(cons
 void sortByDistances(matrix matrix) {
     insertionSortRowsMatrixByRowCriteriaF(matrix, getDistance);
 }
+
+int countEqClassesByRowsSum(matrix matrix) {
+    long long rowSums[matrix.rows];
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        rowSums[i] = sum(matrix.cells[i], matrix.columns);
+    }
+
+    return countUniques(rowSums, matrix.rows);
+}
