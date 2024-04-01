@@ -168,3 +168,22 @@ int countSpecialElements(matrix matrix) {
 
     return count;
 }
+
+void swapPenultimateRow(matrix matrix) {
+    if (matrix.rows == 1) {
+        return;
+    }
+
+    int minColumn = getMinValuePos(matrix).colIndex;
+    int column[matrix.rows];
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        column[i] = matrix.cells[i][minColumn];
+    }
+
+    int destinationRow = matrix.rows - 2;
+
+    for (int i = 0; i < matrix.columns; ++i) {
+        matrix.cells[destinationRow][i] = column[i];
+    }
+}
