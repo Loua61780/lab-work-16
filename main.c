@@ -36,3 +36,15 @@ void getSquareOfMatrixIfSymmetric(matrix* matrix) {
         *matrix = multiply(*matrix, *matrix);
     }
 }
+
+void transposeIfMatrixHasNotEqualSumOfRows(matrix* matrix) {
+    long long sums[matrix->rows];
+
+    for (int i = 0; i < matrix->rows; ++i) {
+        sums[i] = sum(matrix->cells[i], matrix->columns);
+    }
+
+    if (isSet(sums, matrix->rows)) {
+        transposeMatrix(matrix);
+    }
+}
