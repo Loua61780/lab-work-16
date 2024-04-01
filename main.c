@@ -209,3 +209,21 @@ int countNonDescendingRowsMatrices(const matrix* matrices, int matrixAmount) {
 
     return count;
 }
+
+void printMatrixWithMaxZeroRows(const matrix* matrices, int matrixAmount) {
+    int maxAmount;
+    int zeroRowAmounts[matrixAmount];
+
+    for (int i = 0; i < matrixAmount; ++i) {
+        int amount = countZeroRows(matrices[i]);
+
+        zeroRowAmounts[i] = amount;
+        maxAmount = max(maxAmount, amount);
+    }
+
+    for (int i = 0; i < matrixAmount; ++i) {
+        if (zeroRowAmounts[i] == maxAmount) {
+            outputMatrix(matrices[i]);
+        }
+    }
+}
