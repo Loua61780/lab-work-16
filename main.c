@@ -143,3 +143,28 @@ int countEqClassesByRowsSum(matrix matrix) {
 
     return countUniques(rowSums, matrix.rows);
 }
+
+int countSpecialElements(matrix matrix) {
+    int count = 0;
+
+    for (int i = 0; i < matrix.columns; ++i) {
+        int* row = matrix.cells[i];
+
+        for (int j = 0; j < matrix.rows; ++j) {
+            int sumOfOther = 0;
+
+            for (int k = 0; k < matrix.rows; k++) {
+                if (k != j) {
+                    sumOfOther += row[k];
+                }
+            }
+
+            if (row[j] > sumOfOther) {
+                count++;
+                break;
+            }
+        }
+    }
+
+    return count;
+}
