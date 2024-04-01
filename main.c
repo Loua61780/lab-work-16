@@ -54,3 +54,32 @@ bool isMutuallyInverseMatrices(matrix left, matrix right) {
 
     return isEMatrix(&multiplication);
 }
+
+long long findSumOfMaxesOfPseudoDiagonal(matrix matrix) {
+    int arraySize = matrix.rows + matrix.columns - 1;
+    int maxes[arraySize];
+
+    for (int i = 0; i < arraySize; ++i) {
+        maxes[i] = INT_MIN;
+    }
+
+    int increment = matrix.columns - 1;
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        for (int j = 0; j < matrix.columns; ++j) {
+            int index = i - j + increment;
+
+            maxes[index] = max(maxes[index], matrix.cells[i][j]);
+        }
+    }
+
+    long long sum = 0;
+
+    for (int i = 0; i < arraySize; ++i) {
+        if (i != increment) {
+            sum += maxes[i];
+        }
+    }
+
+    return sum;
+}
