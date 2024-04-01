@@ -291,3 +291,51 @@ int countSpecialElements2(matrix matrix) {
 
     return count;
 }
+
+static double getScalarProduct(const int* leftVector, const int* rightVector, int vectorValueAmount) {
+    double product = 0;
+
+    for (int i = 0; i < vectorValueAmount; ++i) {
+        product += leftVector[i] * rightVector[i];
+    }
+
+    return product;
+}
+
+double getVectorLength(const int* vector, int vectorValueAmount) {
+    double squaredValuesSum = 0;
+
+    for (int i = 0; i < vectorValueAmount; ++i) {
+        squaredValuesSum += pow(vector[i], 2);
+    }
+
+    return sqrt(squaredValuesSum);
+}
+
+double getCosine(const int* leftVector, const int* rightVector, int vectorValueAmount) {
+    double scalarProduct = getScalarProduct(leftVector, rightVector, vectorValueAmount);
+    double leftVectorLength = getVectorLength(leftVector, vectorValueAmount);
+    double rightVectorLength = getVectorLength(rightVector, vectorValueAmount);
+
+    return scalarProduct / (leftVectorLength * rightVectorLength);
+}
+
+double getAngle(const int* leftVector, const int* rightVector, int vectorValueAmount) {
+    return acos(getCosine(leftVector, rightVector, vectorValueAmount));
+}
+
+int getVectorIndexWithMaxAngle(matrix vectorsMatrix, const int* vector) {
+    int maxIndex = 0;
+    double maxAngle = getAngle(vectorsMatrix.cells[0], vector, vectorsMatrix.columns);
+
+    for (int i = 1; i < vectorsMatrix.rows; ++i) {
+        double angle = getAngle(vectorsMatrix.cells[i], vector, vectorsMatrix.columns);
+
+        if (angle > maxAngle) {
+            maxIndex = i;
+            maxAngle = angle;
+        }
+    }
+
+    return maxIndex;
+}
