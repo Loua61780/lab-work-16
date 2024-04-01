@@ -187,3 +187,25 @@ void swapPenultimateRow(matrix matrix) {
         matrix.cells[destinationRow][i] = column[i];
     }
 }
+
+static bool hasAllNonDescendingRows(matrix matrix) {
+    for (int i = 0; i < matrix.rows; ++i) {
+        if (!isNonDescending(matrix.cells[i], matrix.columns)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int countNonDescendingRowsMatrices(const matrix* matrices, int matrixAmount) {
+    int count = 0;
+
+    for (int i = 0; i < matrixAmount; ++i) {
+        if (hasAllNonDescendingRows(matrices[i])) {
+            count++;
+        }
+    }
+
+    return count;
+}
