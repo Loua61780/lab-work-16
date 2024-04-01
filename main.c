@@ -339,3 +339,17 @@ int getVectorIndexWithMaxAngle(matrix vectorsMatrix, const int* vector) {
 
     return maxIndex;
 }
+
+long long getScalarProductRowAndCol(matrix matrix, int rowIndex, int columnIndex) {
+    int column[matrix.rows];
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        column[i] = matrix.cells[i][columnIndex];
+    }
+
+    return (long long) getScalarProduct(column, matrix.cells[rowIndex], matrix.rows);
+}
+
+long long getSpecialScalarProduct(matrix matrix) {
+    return getScalarProductRowAndCol(matrix,getMaxValuePos(matrix).rowIndex,getMinValuePos(matrix).colIndex);
+}
