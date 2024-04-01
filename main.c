@@ -26,3 +26,7 @@ void swapMaxElementRowAndMinElementRow(matrix matrix) {
 void sortRowsByMinElement(matrix matrix) {
     sortRowsByCriteria(matrix, findMax);
 }
+
+void sortColsByMinElement(matrix matrix) {
+    sortColumnsByCriteria(matrix, findMin);
+}
