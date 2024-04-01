@@ -227,3 +227,33 @@ void printMatrixWithMaxZeroRows(const matrix* matrices, int matrixAmount) {
         }
     }
 }
+
+int getMatrixNorm(matrix matrix) {
+    int max = 0;
+
+    for (int i = 0; i < matrix.rows; ++i) {
+        int* row = matrix.cells[i];
+
+        for (int j = 0; j < matrix.columns; ++j) {
+            max = max(max, abs(row[j]));
+        }
+    }
+
+    return max;
+}
+
+void printMatricesWithMinNorm(matrix* matrices, int matrixAmount) {
+    int matrixNorms[matrixAmount];
+
+    for (int i = 0; i < matrixAmount; ++i) {
+        matrixNorms[i] = getMatrixNorm(matrices[i]);
+    }
+
+    int minNorm = findMin(matrixNorms, matrixAmount);
+
+    for (int i = 0; i < matrixAmount; ++i) {
+        if (matrixNorms[i] == minNorm) {
+            outputMatrix(matrices[i]);
+        }
+    }
+}
