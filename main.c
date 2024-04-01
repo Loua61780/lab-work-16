@@ -100,3 +100,36 @@ int getMinInArea(matrix matrix) {
 
     return min;
 }
+
+float getDistance(const int* values, int valueAmount) {
+    float squaredDistance = 0;
+
+    for (int i = 0; i < valueAmount; ++i) {
+        int value = values[i];
+
+        squaredDistance += ((float) (value * value));
+    }
+
+    return sqrtf(squaredDistance);
+}
+
+void insertionSortRowsMatrixByRowCriteriaF(matrix matrix, float (*criteria)(const int*, int)) {
+    for (int i = 0; i < matrix.rows; i++) {
+        int* row = matrix.cells[i];
+        float weight = criteria(row, matrix.columns);
+        int j = i + 1;
+        float currentWeight;
+
+        while (j >= 0 && (currentWeight = criteria(matrix.cells[j], matrix.columns)) > weight) {
+            matrix.cells[j + 1] = matrix.cells[j];
+            weight = currentWeight;
+            j--;
+        }
+
+        matrix.cells[j + 1] = row;
+    }
+}
+
+void sortByDistances(matrix matrix) {
+    insertionSortRowsMatrixByRowCriteriaF(matrix, getDistance);
+}
